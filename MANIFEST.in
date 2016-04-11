@@ -1,2 +1,2 @@
-include doublemetaphone/doublemetaphone.h
-include doublemetaphone/doublemetaphone.cc
+include doublemetaphone/double_metaphone.h
+include doublemetaphone/double_metaphone.cc

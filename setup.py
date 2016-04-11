@@ -3,7 +3,7 @@ import sys
 from setuptools import setup, Extension
 
 setup(
-    name="Double Metaphone",
+    name="DoubleMetaphone",
     version="0.1",
     description="Python wrapper for C++ Double Metaphone",
     author="Forest Gregg",

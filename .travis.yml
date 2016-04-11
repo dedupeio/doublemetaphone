@@ -1,0 +1,44 @@
+language: python
+sudo: false
+matrix:
+    include:
+        - os: linux
+          python: 2.7
+        - os: linux
+          python: 3.4
+        - os: linux
+          python: 3.5
+        - os: osx
+          language: generic
+          env: TERRYFY_PYTHON='homebrew 2'
+        - os: osx
+          language: generic
+          env: TERRYFY_PYTHON='homebrew 3'
+before_install:
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then git clone https://github.com/MacPython/terryfy; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source terryfy/travis_tools.sh; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then get_python_environment $TERRYFY_PYTHON venv; fi
+    - if [[ "$TERRYFY_PYTHON" == "homebrew 3" ]]; then alias pip=`which pip3` ; fi
+install:
+    - pip install -r requirements.txt
+    - cython --cplus doublemetaphone/*.pyx 
+    - pip install .
+script:
+    - nosetests
+notifications:
+    email: false
+after_success:
+    - echo [distutils]                                  > ~/.pypirc
+    - echo index-servers = pypi                        >> ~/.pypirc
+    - echo [pypi]                                      >> ~/.pypirc
+    - echo repository=https://pypi.python.org/pypi     >> ~/.pypirc
+    - echo username=fgregg                             >> ~/.pypirc
+    - echo password=$PYPIPASSWORD                      >> ~/.pypirc
+    - if [[ $TRAVIS_TAG && "$TRAVIS_OS_NAME" == "osx" ]]; then pip install twine; fi
+    - if [[ $TRAVIS_TAG && "$TRAVIS_OS_NAME" == "osx" ]]; then python setup.py bdist_wheel; fi
+    - if [[ $TRAVIS_TAG && "$TRAVIS_OS_NAME" == "osx" ]]; then twine upload dist/*; fi
+
+env:
+    global:
+        secure: nPhN4dBjyaHowYTpSDmpm1cWZz6x4PnO2oBnq5Gd4KVt2pzyx9C35sawe4ZNpne74Z0yE+udEu4IKltX+DzPGEjeVPkEDZ3z1lMfrbw+iF28rl4lL5X7cFzDzlIgUE/cfytOkzY4XvT4ws4dg4JypcKTLGIRwmdRaSkmZayYOB08IKCNUIqVqEsHj89oqN96HwkDMaOQXldbB0GkG/JI3o0bR21/IWj4gwqP1+SuqL453IuGp/fKwJNq5HsbuB00wggwrruDfJp7b/oG6k+ygG2tknJB95Wq2yTwCQACW1QnWkJYH4uSxLeqqtipxZ1iLf1FxB5QanMz4Fwwx+x1heByZ6KZGI6ULO6/2vXtno+uZHc32iybn1EIe8xN1uGJ5djoWe5jQX7lixe2tD28KhDpnQuWuwLAsra5XD9+R4+UZIaVtnzWvw1jAYfpBoO5K8+rm0ufbNi70KPKPaJu3v2+Co7zg3YkGk/PHeiDIapRx7zRokgekyKL3dFtPU2UXHGOW8zFoPxrM1QCzb3miYrApblH9vWeBgbKrtXOOI3dSC7HR5Ku2lnktE9sCC9whbe3UdmpOTam6HAber57sn8d7NnnWKVuIg3tJ+frnxZAMY1kJCBiHhCH06/bfvx0F6o1cSnY/+l3XOFSt5IDNwzec/1Q7zb8FTBe3llOWRI=
+
