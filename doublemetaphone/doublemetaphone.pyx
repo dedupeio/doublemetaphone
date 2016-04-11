@@ -5,7 +5,7 @@ from libcpp.vector cimport vector
 cdef extern from "double_metaphone.h" nogil :
     void DoubleMetaphone(string s, vector[string] *c)
 
-cpdef tuple doubleMetaphone(basestring s):
+cpdef tuple doublemetaphone(basestring s):
     cdef string cpp_string = _bstring(s)
     cdef vector[string] codes
     DoubleMetaphone(cpp_string, &codes)
