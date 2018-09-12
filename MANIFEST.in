@@ -1,3 +1,6 @@
+include pyproject.toml
 include doublemetaphone/double_metaphone.h
 include doublemetaphone/double_metaphone.cc
+include doublemetaphone/doublemetaphone.pyx
+include doublemetaphone/doublemetaphone.cpp
 include LICENSE
