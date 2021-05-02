@@ -20,7 +20,7 @@ else:
 
 setup(
     name="DoubleMetaphone",
-    version="0.1",
+    version="1.0",
     description="Python wrapper for C++ Double Metaphone",
     author="Forest Gregg",
     author_email="fgregg@gmail.com",
@@ -29,7 +29,7 @@ setup(
     classifiers=[
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Artistic License",
         "Operating System :: POSIX",
         "Programming Language :: Cython",
         "Programming Language :: Python",
