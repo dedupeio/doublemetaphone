@@ -20,7 +20,7 @@ else:
 
 setup(
     name="DoubleMetaphone",
-    version="0.1",
+    version="0.2",
     description="Python wrapper for C++ Double Metaphone",
     author="Forest Gregg",
     author_email="fgregg@gmail.com",
