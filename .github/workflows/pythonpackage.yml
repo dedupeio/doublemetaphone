@@ -46,6 +46,7 @@ jobs:
       env:
         CIBW_ARCHS_MACOS: x86_64 arm64 universal2
         CIBW_ARCHS_LINUX: auto aarch64
+        CIBW_SKIP: pp38-manylinux_x86_64
     - name: Build sdist
       run: |
         pip install cython wheel setuptools
