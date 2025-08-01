@@ -24,6 +24,7 @@ setup(
     description="Python wrapper for C++ Double Metaphone",
     author="Forest Gregg",
     author_email="fgregg@gmail.com",
+    license="Artistic-2.0",
     packages=['doublemetaphone'],
     ext_modules=ext_modules,
     classifiers=[
